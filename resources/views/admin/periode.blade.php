@@ -151,70 +151,75 @@
                                     <td>{{$item->tahun}}</td>
                                     <td>
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal{{$item->id_periode}}">
-                                            <i class="icon-pencil"></i>
-                                        </button>
+                                        <div class="d-flex">
+                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                data-target="#exampleModal{{$item->id_periode}}">
+                                                <i class="icon-pencil"></i>
+                                            </button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{$item->id_periode}}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Ubah Periode
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal{{$item->id_periode}}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Periode
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url('periode/edit/'.$item->id_periode)}}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Bulan</label>
+                                                                    <select class="form-control"
+                                                                        id="exampleFormControlSelect1" name="bulan">
+                                                                        <option value="{{$item->bulan}}">
+                                                                            {{$item->bulan}}
+                                                                        </option>
+                                                                        <option value="Januari">Januari</option>
+                                                                        <option value="Februari">Februari</option>
+                                                                        <option value="Maret">Maret</option>
+                                                                        <option value="April">April</option>
+                                                                        <option value="Mei">Mei</option>
+                                                                        <option value="Juni">Juni</option>
+                                                                        <option value="Juli">Juli</option>
+                                                                        <option value="Agustus">Agustus</option>
+                                                                        <option value="September">September</option>
+                                                                        <option value="Oktober">Oktober</option>
+                                                                        <option value="November">November</option>
+                                                                        <option value="Desember">Desember</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Tahun</label>
+                                                                    <input type="number" class="form-control"
+                                                                        id="exampleInputPassword1" name="tahun"
+                                                                        value="{{$item->tahun}}">
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Simpan</button>
+                                                        </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{url('periode/edit/'.$item->id_periode)}}" method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Bulan</label>
-                                                                <select class="form-control"
-                                                                    id="exampleFormControlSelect1" name="bulan">
-                                                                    <option value="{{$item->bulan}}">{{$item->bulan}}
-                                                                    </option>
-                                                                    <option value="Januari">Januari</option>
-                                                                    <option value="Februari">Februari</option>
-                                                                    <option value="Maret">Maret</option>
-                                                                    <option value="April">April</option>
-                                                                    <option value="Mei">Mei</option>
-                                                                    <option value="Juni">Juni</option>
-                                                                    <option value="Juli">Juli</option>
-                                                                    <option value="Agustus">Agustus</option>
-                                                                    <option value="September">September</option>
-                                                                    <option value="Oktober">Oktober</option>
-                                                                    <option value="November">November</option>
-                                                                    <option value="Desember">Desember</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Tahun</label>
-                                                                <input type="number" class="form-control"
-                                                                    id="exampleInputPassword1" name="tahun"
-                                                                    value="{{$item->tahun}}">
-                                                            </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                                    </div>
-                                                    </form>
                                                 </div>
                                             </div>
+                                            <form action="{{url('periode/delete/'.$item->id_periode)}}" method="post"
+                                                id="hapusPeriode">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onclick="clickHapusPeriode()"
+                                                    class="btn btn-danger btn-sm" style="margin-top: 2px"><i
+                                                        class="icon-trash"></i></button>
+                                            </form>
                                         </div>
-                                        <form action="{{url('periode/delete/'.$item->id_periode)}}" method="post"
-                                            id="hapusPeriode">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" onclick="clickHapusPeriode()"
-                                                class="btn btn-danger btn-sm" style="margin-top: 2px"><i
-                                                    class="icon-trash"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

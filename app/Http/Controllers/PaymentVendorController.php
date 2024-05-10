@@ -54,6 +54,12 @@ class PaymentVendorController extends Controller
         ]);
         return redirect()->back()->with('create', 'Data Berhasil Ditambah');
     }
+    public function put($id_payment_v){
+        $title = 'Edit Transaksi';
+        $pay_date = $this->paymentDate->Tampil();
+        $data = paymentVendor::where('id_payment_v',$id_payment_v)->first();
+        return view('admin.edit-transaksi',compact('title','data','pay_date'));
+    }
     public function putTransaksi($id_payment_v, Request $request){
         $this->paymentvendor->Put($id_payment_v, [
             'amount_payment' => $request->jumlah_bayar,
@@ -62,7 +68,7 @@ class PaymentVendorController extends Controller
             'payment_date' => $request->payment_date,
         ]);
         
-        return redirect('peb/vendor/data-transaksi')->with('update', 'Data Berhasil Diubah');
+        return redirect()->back()->with('update', 'Data Berhasil Diubah');
     }
     public function delete($id_payment_v){
         $this->paymentvendor->Del($id_payment_v);

@@ -46,7 +46,12 @@ Route::middleware('Role:admin')->group(function () {
         Route::put('edit/{id_bank}', [BankController::class, 'put']);
         Route::delete('delete/{id_bank}', [BankController::class, 'delete']);
     });
-    Route::get('data-karyawan', [KaryawanController::class, 'index']);
+    Route::prefix('data-karyawan')->group(function(){
+        Route::get('/', [KaryawanController::class, 'index']);
+        Route::post('/', [KaryawanController::class, 'post']);
+        Route::put('edit/{id_karyawan}', [KaryawanController::class, 'put']);
+        Route::put('delete/{id_karyawan}', [KaryawanController::class, 'delete']);
+    });
     Route::prefix('periode')->group(function () {
         Route::get('/', [PeriodeController::class, 'index']);
         Route::post('/', [PeriodeController::class, 'post']);
@@ -74,7 +79,8 @@ Route::middleware('Role:admin')->group(function () {
             Route::get('/', [PaymentVendorController::class, 'index']);
             Route::post('/', [PaymentVendorController::class, 'postTransaksi']);
             Route::get('{id_payment_v}', [PaymentVendorController::class, 'export']);
-            Route::put('{id_payment_v}', [PaymentVendorController::class, 'putTransaksi']);
+            Route::put('/edit/{id_payment_v}', [PaymentVendorController::class, 'putTransaksi']);
+            Route::get('/edit/{id_payment_v}', [PaymentVendorController::class, 'put']);
             Route::delete('{id_payment_v}', [PaymentVendorController::class, 'delete']);
         });
     });

@@ -53,4 +53,13 @@ class Karyawan extends Model
     {
         return $this->orderBy('id_karyawan', 'DESC')->get();
     }
+    public function Buat($data){
+        return $this->create($data);
+    }
+    public function Edit($data, $id_karyawan){
+        return $this->find($id_karyawan)->update($data);
+    }
+    public function Hapus($id_karyawan){
+        return $this->find($id_karyawan)->delete();
+    }
 }
